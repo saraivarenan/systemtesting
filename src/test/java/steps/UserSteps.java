@@ -2,8 +2,6 @@ package steps;
 
 import cucumber.api.java.pt.*;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.security.Credentials;
 import pages.*;
 import parametros.ProcessosParametros;
 import support.BaseSteps;
@@ -15,7 +13,7 @@ public class UserSteps extends BaseSteps {
     private MenuImpacta menuImpacta = new MenuImpacta(driver);
     private ListaProcessos listaProcesso = new ListaProcessos(driver);
     private NovoProcesso novoProcesso = new NovoProcesso(driver);
-    private DetalheUsuario detalheUsuario = new DetalheUsuario(driver);
+    private DetalheProcesso detalheProcesso = new DetalheProcesso(driver);
     private ProcessosParametros processoParametros = new ProcessosParametros();
 
     @Dado("^que o usuário está na pagina inicial$")
@@ -42,9 +40,9 @@ public class UserSteps extends BaseSteps {
         novoProcesso.selectUrgente("Sim");
         novoProcesso.selecionarRadioButton();
         novoProcesso.assistenciaSocial(processoParametros.getAssistenteSocial());
-        novoProcesso.dataEntrada();
+        novoProcesso.dataEntrada(processoParametros.getDataEntrada());
         novoProcesso.dataSaida(processoParametros.getDataSaida());
-        novoProcesso.dataAgendamento("01/02/2021");
+        novoProcesso.dataAgendamento(processoParametros.getDataAgendamento());
         novoProcesso.Status(processoParametros.getStatus());
         novoProcesso.observacao(processoParametros.getObservecao());
 
@@ -58,8 +56,8 @@ public class UserSteps extends BaseSteps {
 
     @Entao("^o usuario deveria ver a mensagem \"([^\"]*)\"$")
     public void oUsuarioDeveriaVerAMensagem(String mensagem) {
-        System.out.println(detalheUsuario.getNotice());
-        Assert.assertEquals(mensagem, detalheUsuario.getNotice());
+        System.out.println(detalheProcesso.getNotice());
+        Assert.assertEquals(mensagem, detalheProcesso.getNotice());
     }
 
     @E("^o usuário clicar em salvar$")
@@ -70,7 +68,7 @@ public class UserSteps extends BaseSteps {
     @E("^clicar em voltar$")
     public void oUsuárioClicaNoBotãoVoltar() {
 
-        detalheUsuario.btnVoltar();
+        detalheProcesso.btnVoltar();
     }
 
     @E("^o usuário clica no botão editar do usuário$")
@@ -84,8 +82,8 @@ public class UserSteps extends BaseSteps {
     }
     @E("^criado um processo \"([^\"]*)\"$")
     public void processoCriadoComSucesso(String mensagem){
-        System.out.println(detalheUsuario.getNotice());
-        Assert.assertEquals(mensagem, detalheUsuario.getNotice());
+        System.out.println(detalheProcesso.getNotice());
+        Assert.assertEquals(mensagem, detalheProcesso.getNotice());
     }
     @E("^o usuario clicar em excluir no registro criado$")
     public void oUsuarioClicaExcluir() {

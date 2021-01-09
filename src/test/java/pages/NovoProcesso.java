@@ -1,5 +1,6 @@
 package pages;
 
+import parametros.ProcessosParametros;
 import support.DriverQA;
 import support.SuportWeb;
 
@@ -7,10 +8,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class NovoProcesso extends BasePage {
     SuportWeb sup = new SuportWeb();
+    ProcessosParametros parametrosProc = new ProcessosParametros();
 
     public NovoProcesso(DriverQA stepDriver) {
         super(stepDriver);
@@ -40,13 +44,22 @@ public class NovoProcesso extends BasePage {
     public void assistenciaSocial(String value) {
         driver.sendKeys(value,"processo_assistente_social");
     }
-    public void dataEntrada() {
+    public void dataEntrada(String value) {
         sup.tempo(2);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime now = LocalDateTime.now();
-        driver.sendKeys(dtf.format(now),"processo_data_entrada");
+        driver.sendKeys(value,"processo_data_entrada");
+
     }
     public void dataSaida(String value) throws ParseException {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date today = new Date();
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(today);
+        cal.add(Calendar.DAY_OF_MONTH,+30);
+        Date today30 = cal.getTime();
+        //value =
 //        SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy");
 //        String result = out.format(value);
         driver.sendKeys(value,"processo_data_saida");

@@ -4,8 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class ProcessosParametros {
     String vara = "01";
@@ -69,38 +71,41 @@ public class ProcessosParametros {
     }
 
     public String getDataEntrada() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        dataEntrada = dtf.format(now);
         return dataEntrada;
     }
 
     public void setDataEntrada(String dataEntrada) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDateTime now = LocalDateTime.now();
-        dataEntrada = dtf.format(now);
         this.dataEntrada = dataEntrada;
     }
 
     public String getDataSaida() {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date today = new Date();
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(today);
+        cal.add(Calendar.DAY_OF_MONTH,+30);
+        Date today30 = cal.getTime();
+        dataSaida =  formato.format(today30);
         return dataSaida;
     }
 
     public void setDataSaida(String dataSaida) throws ParseException {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDateTime now = LocalDateTime.now();
-
-        String dt = dtf.format(now);
-
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        Calendar c = Calendar.getInstance();
-        c.setTime(sdf.parse(dt));
-        c.add(Calendar.DATE,30 );  // número de dias a adicionar
-        dt = sdf.format(c.getTime());
-        System.out.println("data"+dt);
-        dataSaida = dt;
         this.dataSaida = dataSaida;
     }
 
     public String getDataAgendamento() {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date today = new Date();
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(today);
+        cal.add(Calendar.DAY_OF_MONTH,+15);
+        Date today30 = cal.getTime();
+        dataAgendamento =  formato.format(today30);
         return dataAgendamento;
     }
 

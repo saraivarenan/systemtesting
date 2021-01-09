@@ -1,9 +1,8 @@
 package pages;
 
-import org.openqa.selenium.By;
 import support.DriverQA;
 
-public class DetalheUsuario extends BasePage {
+public class DetalheProcesso extends BasePage {
 
     static String code ;
 
@@ -11,10 +10,10 @@ public class DetalheUsuario extends BasePage {
         return code;
     }
     public  void setCode(String code) {
-        DetalheUsuario.code = code;
+        DetalheProcesso.code = code;
     }
 
-    public DetalheUsuario(DriverQA stepDriver) {
+    public DetalheProcesso(DriverQA stepDriver) {
         super(stepDriver);
     }
 
