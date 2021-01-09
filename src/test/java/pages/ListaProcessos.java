@@ -39,6 +39,7 @@ public class ListaProcessos extends BasePage {
     public void validarRegistroNaoExiste(){
 
         String code = detalheProcesso.getCode();
+        driver.waitElement("codigo_"+code+"");
        boolean elementoPresent = driver.getElements("codigo_"+code+"").size() >0;
 
        System.out.println(code+" "+ elementoPresent);
@@ -46,21 +47,77 @@ public class ListaProcessos extends BasePage {
     }
     public void clicarMostrar(){
         String code = detalheProcesso.getCode();
+        driver.waitElement("#btn-show_"+code+" > .ls-btn-primary","css");
         driver.getDriver().findElement(By.cssSelector("#btn-show_"+code+" > .ls-btn-primary")).click();
     }
     public void validarRegistroCriado(){
         String code = detalheProcesso.getCode();
         driver.waitElement("codigo","id");
-System.out.println("codigo"+driver.getDriver().findElement(By.id("codigo")).getText());
-       Assert.assertEquals(driver.getDriver().findElement(By.id("codigo")).getText(),code);
-        Assert.assertEquals( driver.getDriver().findElement(By.id("vara")).getText(),processosParametros.getVara());
-        Assert.assertEquals(driver.getDriver().findElement(By.id("numero")).getText(),processosParametros.getNumeroProcesso());
-        Assert.assertEquals(driver.getDriver().findElement(By.id("natureza")).getText(),processosParametros.getNaturezaProcesso());
-        Assert.assertEquals(driver.getDriver().findElement(By.id("as_social")).getText(),processosParametros.getAssistenteSocial());
-        Assert.assertEquals(driver.getDriver().findElement(By.id("status")).getText(),processosParametros.getStatus());
-        Assert.assertEquals(driver.getDriver().findElement(By.id("observacao")).getText(),processosParametros.getObservecao());
+        driver.waitElement("vara","id");
+        try {
+            driver.getDriver().findElement(By.id("codigo")).getText();
+            Assert.assertEquals(driver.getDriver().findElement(By.id("codigo")).getText(),code);
+        }
+        catch(org.openqa.selenium.StaleElementReferenceException ex)
+        {
+            driver.getDriver().findElement(By.id("codigo")).getText();
+            Assert.assertEquals(driver.getDriver().findElement(By.id("codigo")).getText(),code);
+        }
 
-
+        try {
+            driver.getDriver().findElement(By.id("vara")).getText();
+            Assert.assertEquals(driver.getDriver().findElement(By.id("vara")).getText(),processosParametros.getVara());
+        }
+        catch(org.openqa.selenium.StaleElementReferenceException ex)
+        {
+            driver.getDriver().findElement(By.id("vara")).getText();
+            Assert.assertEquals(driver.getDriver().findElement(By.id("vara")).getText(),processosParametros.getVara());
+        }
+        try {
+            driver.getDriver().findElement(By.id("numero")).getText();
+            Assert.assertEquals(driver.getDriver().findElement(By.id("numero")).getText(),processosParametros.getNumeroProcesso());
+        }
+        catch(org.openqa.selenium.StaleElementReferenceException ex)
+        {
+            driver.getDriver().findElement(By.id("numero")).getText();
+            Assert.assertEquals(driver.getDriver().findElement(By.id("numero")).getText(),processosParametros.getNumeroProcesso());
+        }
+        try {
+            driver.getDriver().findElement(By.id("natureza")).getText();
+            Assert.assertEquals(driver.getDriver().findElement(By.id("natureza")).getText(),processosParametros.getNaturezaProcesso());
+        }
+        catch(org.openqa.selenium.StaleElementReferenceException ex)
+        {
+            driver.getDriver().findElement(By.id("natureza")).getText();
+            Assert.assertEquals(driver.getDriver().findElement(By.id("natureza")).getText(),processosParametros.getNaturezaProcesso());
+        }
+        try {
+            driver.getDriver().findElement(By.id("as_social")).getText();
+            Assert.assertEquals(driver.getDriver().findElement(By.id("as_social")).getText(),processosParametros.getAssistenteSocial());
+        }
+        catch(org.openqa.selenium.StaleElementReferenceException ex)
+        {
+            driver.getDriver().findElement(By.id("as_social")).getText();
+            Assert.assertEquals(driver.getDriver().findElement(By.id("as_social")).getText(),processosParametros.getAssistenteSocial());
+        }
+        try {
+            driver.getDriver().findElement(By.id("status")).getText();
+            Assert.assertEquals(driver.getDriver().findElement(By.id("status")).getText(),processosParametros.getStatus());
+        }
+        catch(org.openqa.selenium.StaleElementReferenceException ex)
+        {
+            driver.getDriver().findElement(By.id("status")).getText();
+            Assert.assertEquals(driver.getDriver().findElement(By.id("status")).getText(),processosParametros.getStatus());
+        }
+        try {
+            driver.getDriver().findElement(By.id("observacao")).getText();
+            Assert.assertEquals(driver.getDriver().findElement(By.id("observacao")).getText(),processosParametros.getObservecao());
+        }
+        catch(org.openqa.selenium.StaleElementReferenceException ex)
+        {
+            driver.getDriver().findElement(By.id("observacao")).getText();
+            Assert.assertEquals(driver.getDriver().findElement(By.id("observacao")).getText(),processosParametros.getObservecao());
+        }
     }
 
 }

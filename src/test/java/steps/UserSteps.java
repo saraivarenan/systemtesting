@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.pt.*;
 import org.junit.Assert;
 import pages.*;
@@ -15,6 +16,7 @@ public class UserSteps extends BaseSteps {
     private NovoProcesso novoProcesso = new NovoProcesso(driver);
     private DetalheProcesso detalheProcesso = new DetalheProcesso(driver);
     private ProcessosParametros processoParametros = new ProcessosParametros();
+    private AtualizarPage atualizarPage = new AtualizarPage(driver);
 
     @Dado("^que o usuário está na pagina inicial$")
     public void queOUsuárioEstáNaPaginaInicial() {
@@ -117,4 +119,23 @@ public class UserSteps extends BaseSteps {
         listaProcesso.validarRegistroCriado();
     }
 
+    @E("^clicar em editar$")
+    public void clicarEmEditar() {
+        detalheProcesso.btnEditar();
+    }
+
+    @E("^clicar em salvar\\.$")
+    public void clicarEmSalvar() {
+atualizarPage.btnSalvar();
+    }
+
+    @Entao("^deve ser apresentando uma \"([^\"]*)\"$")
+    public void processoAtualizado(String mensagem) throws Throwable {
+     Assert.assertEquals(mensagem, detalheProcesso.getNotice());
+    }
+
+    @E("^preencher o campo \"([^\"]*)\" com valor \"([^\"]*)\"$")
+    public void preencherOCampoComValor(String elemento, String valorCampo) throws Throwable {
+        atualizarPage.preencherCampo(valorCampo,elemento);
+    }
 }

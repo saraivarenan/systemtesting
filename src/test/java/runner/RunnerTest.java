@@ -11,6 +11,6 @@ import org.junit.runner.RunWith;
 @CucumberOptions(features = {"src/test/resources/features"},
         plugin = {"json:target/reports/CucumberReport.json"},
         glue = "steps",
-        tags = {"~@ignore"})
+        tags = {"@processo"})
 public class RunnerTest {
 }
