@@ -6,9 +6,15 @@ import cucumber.api.java.Before;
 import org.openqa.selenium.TakesScreenshot;
 import support.BaseSteps;
 
+import java.net.MalformedURLException;
+
 import static org.openqa.selenium.OutputType.BYTES;
 
 public class Hooks extends BaseSteps {
+
+
+    public Hooks() throws MalformedURLException {
+    }
 
     @Before
     public void beforeScenario(Scenario scenario) {
@@ -29,3 +35,4 @@ public class Hooks extends BaseSteps {
         driver.quit();
     }
 }
+

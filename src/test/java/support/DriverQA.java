@@ -7,10 +7,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,7 +26,7 @@ public class DriverQA {
     private static final long DEFAULT_WAIT_TIMEOUT = 20;
     private static final long IMPLICITLY_WAIT_TIMEOUT = 10;
 
-    public void start(String parBrowser) {
+    public void start(String parBrowser) throws MalformedURLException {
         String title;
         try {
             title = driver.getTitle();
@@ -42,11 +45,13 @@ public class DriverQA {
                 case "chrome":
 //                    ChromeDriverManager.getInstance().setup();
                     ChromeOptions optionsC = new ChromeOptions();
+
                     // hides the info message that says chrome is being controlled by automated test software
                     optionsC.addArguments(Arrays.asList(
                             "disable-infobars", "ignore-certificate-errors",
                             "start-maximized"));
-                    driver = new ChromeDriver(optionsC);
+                    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), optionsC);
+
                     break;
                 default:
                     break;

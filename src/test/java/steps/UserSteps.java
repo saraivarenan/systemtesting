@@ -7,6 +7,7 @@ import pages.*;
 import parametros.ProcessosParametros;
 import support.BaseSteps;
 
+import java.net.MalformedURLException;
 import java.text.ParseException;
 
 public class UserSteps extends BaseSteps {
@@ -17,6 +18,9 @@ public class UserSteps extends BaseSteps {
     private DetalheProcesso detalheProcesso = new DetalheProcesso(driver);
     private ProcessosParametros processoParametros = new ProcessosParametros();
     private AtualizarPage atualizarPage = new AtualizarPage(driver);
+
+    public UserSteps() throws MalformedURLException {
+    }
 
     @Dado("^que o usuário está na pagina inicial$")
     public void queOUsuárioEstáNaPaginaInicial() {
